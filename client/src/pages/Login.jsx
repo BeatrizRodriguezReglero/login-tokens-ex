@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { loginRequest } from "../utils/auth/auth.api";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Login=()=>{
-    const [userData, setUserData]= useState()
+    const{userData, setUserData,loading}=useContext(AuthContext)
     console.log(userData)
 	const navigate = useNavigate()
+
+	useEffect(()=>{
+		if(!userData) return
+		navigate('/')
+	},[userData])
+	if(loading)return <h1>Loading...</h1>
     return(
         <>
             <form onSubmit={(event)=>handleSubmit(event, setUserData)}>

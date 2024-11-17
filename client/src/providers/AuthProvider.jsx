@@ -7,9 +7,9 @@ const AuthProvider = ({children})=>{
     const [loading,setLoading]= useState(true)
 
     console.log(userData)
-    
+
     useEffect(()=>{
-        checkLogin(setLoading)
+        checkLogin(setLoading, setUserData)
     },[])
 
     return <AuthContext.Provider value={{ userData, setUserData, loading}}>{children}</AuthContext.Provider>
@@ -28,6 +28,7 @@ const checkLogin =async (setLoading,setUserData)=>{
             setLoading(false)
             return
         }
+        console.log(data)
         setUserData(data)
         setLoading(false)
 
